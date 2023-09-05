@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 type Todo = {
@@ -30,8 +30,18 @@ export default function Home() {
     console.log("data", data);
     setTodos([...todos, data])
     setNewTodoText('')
-
   }
+
+  useEffect(() => {
+    fetch("http://localhost:3000/api/todo")
+      .then(res => res.json())
+      .then(data => {
+        setTodos(data)
+        setLoading(false)
+      }
+      )
+  }, []);
+
 
   return (
     <main className="grid lg:place-items-start place-items-center w-full bg-gray-800 text-purple-500 min-h-screen">
@@ -61,6 +71,10 @@ export default function Home() {
                 className="bg-slate-500 px-6 py-2 rounded-lg my-7 text-white text-lg uppercase font-semibold">Add</button>
             </>}
 
+        </div>
+
+        <div className="">
+          {loading ? }
         </div>
       </div>
     </main>
