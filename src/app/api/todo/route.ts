@@ -1,4 +1,4 @@
-import clientPromise from "@/lib/mongoDB";
+import clientPromise from "@/src/lib/mongoDB";
 import { ObjectId } from "mongodb";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
     const todo = { text: text, completed: false };
     await collection.insertOne(todo);
     return NextResponse.json(todo, { status: 201 });
+
   } catch (error) {
     return NextResponse.json(error, { status: 500 });
   }
